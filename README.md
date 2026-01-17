@@ -9,3 +9,7 @@ A y2k-computer inspired interface to showcase my work.
 - JS
 
 ## ☁︎ The process
+
+## ☾ Running the project
+
+## ❤︎ Preview
