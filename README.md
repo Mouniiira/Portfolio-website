@@ -1,2 +1,11 @@
 # Portfolio-website
-All the files for my personal portfolio website
+▶︎ •၊၊||၊|။||||။‌‌‌‌‌၊|• 0:10
+
+A y2k-computer inspired interface to showcase my work.
+
+## ✦ Features
+- HTML
+- CSS
+- JS
+
+## ☁︎ The process
