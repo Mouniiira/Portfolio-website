@@ -32,6 +32,14 @@ body {
     margin: 0 auto 5px;
 }
 
+.icon img {
+    transition: transform 0.2s ease;
+}
+
+.icon:hover img {
+    transform: scale(1.15);
+}
+
 /* Popup */
 .popup {
     position: fixed;
