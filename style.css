@@ -80,19 +80,66 @@ body {
     font-size: 14px;
 }
 
+/* Window popup */
+.window {
+    position: absolute;
+    top: 120px;
+    left: 250px;
+    width: 400px;
+    background: #C0C0C0;
+    border: 2px solid #ffffff;
+    box-shadow: 4px 4px 0px #808080;
+    display: none;
+}
+
+/* Title bar */
+.title-bar {
+    background: linear-gradient(to right, #670235, #8A1048);
+    color: white;
+    padding: 4px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Close button */
+.close-btn {
+    background: #C0C0C0;
+    border: 2px outset #ffffff;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close-btn:active {
+    border: 2px inset #808080;
+}
+
+/* Window content */
+.window-content {
+    padding: 10px;
+    text-align: center;
+}
+
+.window-content img {
+    max-width: 100%;
+}
+
 /* Custom cursors */
 body {
-    cursor: url("cursor.cur"), default;
+    cursor: url("cursors/cursor.cur"), default;
 }
 
 /* Pointer  */
 a,
 button,
 .icon {
-    cursor: url("pointer.cur"), pointer;
+    cursor: url("cursors/pointer.cur"), pointer;
 }
 
 /* Waiting / loading state */
 .waiting {
-    cursor: url("loading.cur"), wait;
+    cursor: url("cursors/loading.cur"), wait;
 }
+
