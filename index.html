@@ -9,22 +9,22 @@
 <body>
 
 <div class="desktop">
-    <div class="icon" onclick="openPopup('under-construction.gif')">
+    <div class="icon" onclick="openWindow()">
         <img src="icons/user.png">
         About
     </div>
 
-    <div class="icon" onclick="openPopup('under-construction.gif')">
+    <div class="icon" onclick="openWindow()">
         <img src="icons/earth.png">
         Projects
     </div>
 
-    <div class="icon" onclick="openPopup('under-construction.gif')">
+    <div class="icon" onclick="openWindow()">
         <img src="icons/control.png">
         Games
     </div>
 
-    <div class="icon" onclick="openPopup('under-construction.gif')">
+    <div class="icon" onclick="openWindow()">
         <img src="icons/letter.png">
         Contact me
     </div>
@@ -59,6 +59,21 @@
     updateClock();
 </script>
 
+<div class="window" id="popupWindow">
+    <div class="title-bar">
+        <span class="title">Welcome</span>
+        <button class="close-btn" onclick="closeWindow()">X</button>
+    </div>
+
+    <div class="window-content">
+        <img src="pop-up.png" alt="Popup Content">
+    </div>
+</div>
+
+<div class="taskbar">
+    <div class="clock" id="clock"></div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
-
