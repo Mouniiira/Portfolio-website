@@ -38,20 +38,27 @@
         <span>About</span>
         <button class="close-btn" onclick="closeWindow('AboutWindow')">X</button>
     </div>
-    <div class="window-content">
+    <div class="window-content scrollable">
         <p>Mounira Labarang is a freelance front end web developer based in Yaounde, Cameroon.</p>
         <h3>Education</h3>
         <p>Knowledge in software engineering</p>
-        <p>YouTube university</p>
+        <p style="font-style: italic;">YouTube university</p>
         <p>Bachelor's degree in Artificial Intelligence and Big Data</p>
-        <p>Keyce Informatique, 2025</p>
+        <p style="font-style: italic;">Keyce Informatique, 2025</p>
         <h3>Tools</h3>
         <p>HTML/CSS, Js, Python/Streamlit, Visual Studio Code, Microsoft Excel</p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+        <h3>Languages</h3>
+        <p>English – advanced level</p>
+        <p>French – advanced level</p>
+        <p>Hausa – intermediate level</p>
+        <p>Arabic – intermediate level</p>
+        <p>Spanish – intermediate level</p>
+        <h3>Other interests</h3>
+        <p>Illustration</p>
+        <p>Frame by frame 2D animation</p>
+        <p>Reading</p>
+        <p>Writing</p>
+        <p>Sound production</p>
 
     </div>
 </div>
@@ -61,18 +68,25 @@
         <span>Projects</span>
         <button class="close-btn" onclick="closeWindow('ProjectsWindow')">X</button>
     </div>
-    <div class="window-content">
-        <img src="pop-up.png">
+    <div class="window-content scrollable">
+        <h3>DermaCheck</h3>
+        <p>Bachelor's final project</p>
+        <video width="480" height="360" autoplay muted>
+            <source src="DermaCheck.mp4" type="video/mp4">
+        </video>
+        <p>DermaCheck is an app that uses machine learning and image recognition to identify various acne types. It then gives product recommendations based on the user's skin type and more advice with the help of the built in chatbot. Made in streamlit using Python. Currently being redesigned for better UI/UX.</p>
     </div>
 </div>
 
 <div class="window" id="GamesWindow">
     <div class="title-bar">
         <span>Games</span>
-        <button class="close-btn" onclick="closeWindow('GamesWindow')">X</button>
     </div>
     <div class="window-content">
         <img src="under-construction.gif">
+        <div class="window-buttons">
+    <button class="win-btn" onclick="closeWindow('AboutWindow')">OK</button>
+</div>
     </div>
 </div>
 
@@ -82,12 +96,49 @@
         <button class="close-btn" onclick="closeWindow('ContactWindow')">X</button>
     </div>
     <div class="window-content">
-        <img src="pop-up.png">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+        <label>Name:</label>
+        <input type="text" placeholder="Your name">
+
+        <label>Email:</label>
+        <input type="email" placeholder="Your email">
+
+        <label>Project Description:</label>
+        <textarea rows="4" placeholder="Describe your project"></textarea>
+
+        <div class="window-buttons">
+            <button type="submit" class="win-btn">Send</button>
+        </div>
+        </form>
+        <div class="contact-icons">
+        <a href="mailto:mlabarang04@gmail.com">
+            <img src="At_(@)_sign.png" alt="Email" onclick="copyEmail()">
+        </a>
+
+        <a href="https://wa.me/237655970629" target="_blank">
+            <img src="whatsapplogo.png" alt="WhatsApp">
+        </a>
+
+        <a href="https://github.com/Mouniiira" target="_blank">
+            <img src="Github-Logo.png" alt="GitHub">
+        </a>
+    </div>
+
     </div>
 </div>
 
 <div class="taskbar">
     <div class="clock" id="clock"></div>
+</div>
+
+<div class="win-alert" id="winAlert">
+    <div class="alert-box">
+        <div class="alert-title">mouniiira.com</div>
+        <div class="alert-message" id="alertMessage"></div>
+        <div class="alert-buttons">
+            <button class="win-btn" onclick="closeAlert()">OK</button>
+        </div>
+    </div>
 </div>
 
 <script src="script.js"></script>
