@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head></head>
-<meta charset="UTF-8">
-<title>mouniiira.com</title>
-<link rel="stylesheet" href="style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <title>mouniiira.com</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -30,35 +31,7 @@
     </div>
 </div>
 
-<div class="popup" id="popup" onclick="closePopup()">
-    <img id="popupImage">
-</div>
-
-<div class="taskbar">
-    <div class="clock" id="clock"></div>
-</div>
-
-<script>
-    function openPopup(image) {
-        document.getElementById("popupImage").src = image;
-        document.getElementById("popup").style.display = "flex";
-    }
-
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-    }
-
-    function updateClock() {
-        const now = new Date();
-        let hours = now.getHours();
-        let minutes = now.getMinutes().toString().padStart(2, "0");
-        document.getElementById("clock").textContent = `${hours}:${minutes}`;
-    }
-
-    setInterval(updateClock, 1000);
-    updateClock();
-</script>
-
+<!-- Windows Style Popup -->
 <div class="window" id="popupWindow">
     <div class="title-bar">
         <span class="title">Welcome</span>
