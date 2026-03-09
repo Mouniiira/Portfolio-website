@@ -1,12 +1,12 @@
 # ╰┈➤ Portfolio Website
 ▶︎ • ၊ ၊ | | ၊ | ။ | | | | ။‌‌ ၊ |  | ၊ ၊ ၊ • 0:10
 
-A y2k-computer inspired interface to showcase my work.
+A 90's/Y2K-computer inspired interface to showcase my work.
 
 ## ✦ Features
-- HTML
-- CSS
-- JS
+- A section introducing myself
+- A showcase of some projects I've built
+- Contact page
 
 ## ☁︎ The process
 **Research & inspiration** 
