@@ -125,9 +125,43 @@ function copyEmail() {
         });
 }
 
+function formatSeconds(seconds) {
+    if (!Number.isFinite(seconds)) return "0.00 sec.";
+    return `${seconds.toFixed(2)} sec.`;
+}
+
+function updateMusicUI() {
+    const player = document.getElementById("musicPlayer");
+    const currentTimeDisplay = document.getElementById("currentTimeDisplay");
+    const durationDisplay = document.getElementById("durationDisplay");
+    const seekBar = document.getElementById("seekBar");
+    const soundWave = document.getElementById("soundWave");
+
+    if (!player) return;
+
+    if (currentTimeDisplay) {
+        currentTimeDisplay.textContent = formatSeconds(player.currentTime || 0);
+    }
+
+    if (durationDisplay) {
+        durationDisplay.textContent = formatSeconds(player.duration || 0);
+    }
+
+    if (seekBar) {
+        const percent = player.duration ? (player.currentTime / player.duration) * 100 : 0;
+        seekBar.value = percent;
+    }
+
+    if (soundWave) {
+        const offset = player.currentTime ? (player.currentTime * 40) % 200 : 0;
+        soundWave.style.transform = `translateY(-50%) translateX(-${offset}px)`;
+    }
+}
+
 function loadTrack(index) {
     const player = document.getElementById("musicPlayer");
     const label = document.getElementById("nowPlayingLabel");
+    const playPauseBtn = document.getElementById("playPauseBtn");
 
     if (!player || !label || !playlist.length) return;
 
@@ -136,6 +170,12 @@ function loadTrack(index) {
     player.src = playlist[currentTrackIndex].src;
     label.textContent = playlist[currentTrackIndex].title;
     player.load();
+
+    if (playPauseBtn) {
+        playPauseBtn.textContent = "▶";
+    }
+
+    updateMusicUI();
 }
 
 function nextTrack() {
@@ -144,6 +184,33 @@ function nextTrack() {
 
 function previousTrack() {
     loadTrack(currentTrackIndex - 1);
+}
+
+function playPauseTrack() {
+    const player = document.getElementById("musicPlayer");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+
+    if (!player || !playPauseBtn) return;
+
+    if (player.paused) {
+        player.play();
+        playPauseBtn.textContent = "❚❚";
+    } else {
+        player.pause();
+        playPauseBtn.textContent = "▶";
+    }
+}
+
+function stopTrack() {
+    const player = document.getElementById("musicPlayer");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+
+    if (!player || !playPauseBtn) return;
+
+    player.pause();
+    player.currentTime = 0;
+    playPauseBtn.textContent = "▶";
+    updateMusicUI();
 }
 
 function clamp(value, min, max) {
@@ -309,9 +376,15 @@ function refreshDesktop() {
     });
 
     const musicPlayer = document.getElementById("musicPlayer");
+    const playPauseBtn = document.getElementById("playPauseBtn");
+
     if (musicPlayer) {
         musicPlayer.pause();
         musicPlayer.currentTime = 0;
+    }
+
+    if (playPauseBtn) {
+        playPauseBtn.textContent = "▶";
     }
 
     loadTrack(0);
@@ -393,9 +466,57 @@ document.addEventListener("DOMContentLoaded", function () {
         nextTrackBtn.addEventListener("click", nextTrack);
     }
 
+    const playPauseBtn = document.getElementById("playPauseBtn");
+    if (playPauseBtn) {
+        playPauseBtn.addEventListener("click", playPauseTrack);
+    }
+
+    const stopTrackBtn = document.getElementById("stopTrackBtn");
+    if (stopTrackBtn) {
+        stopTrackBtn.addEventListener("click", stopTrack);
+    }
+
+    const recordFakeBtn = document.getElementById("recordFakeBtn");
+    if (recordFakeBtn) {
+        recordFakeBtn.addEventListener("click", function () {
+            showAlert("Recording is not available.");
+        });
+    }
+
+    const seekBar = document.getElementById("seekBar");
+    if (seekBar) {
+        seekBar.addEventListener("input", function () {
+            const player = document.getElementById("musicPlayer");
+            if (!player || !player.duration) return;
+
+            player.currentTime = (seekBar.value / 100) * player.duration;
+            updateMusicUI();
+        });
+    }
+
     const musicPlayer = document.getElementById("musicPlayer");
     if (musicPlayer) {
-        musicPlayer.addEventListener("ended", nextTrack);
+        musicPlayer.addEventListener("timeupdate", updateMusicUI);
+        musicPlayer.addEventListener("loadedmetadata", updateMusicUI);
+        musicPlayer.addEventListener("ended", function () {
+            nextTrack();
+            const playPauseBtn = document.getElementById("playPauseBtn");
+            if (playPauseBtn) {
+                playPauseBtn.textContent = "▶";
+            }
+        });
+        musicPlayer.addEventListener("play", function () {
+            const playPauseBtn = document.getElementById("playPauseBtn");
+            if (playPauseBtn) {
+                playPauseBtn.textContent = "❚❚";
+            }
+        });
+        musicPlayer.addEventListener("pause", function () {
+            const playPauseBtn = document.getElementById("playPauseBtn");
+            if (playPauseBtn && musicPlayer.currentTime !== 0) {
+                playPauseBtn.textContent = "▶";
+            }
+        });
     }
 
     const desktop = document.querySelector(".desktop");
