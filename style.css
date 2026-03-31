@@ -1,231 +1,416 @@
-
-body {
-    margin: 0;
-    height: 100vh;
-    background-color: #008080;
-    font-family: Tahoma, Arial, sans-serif;
-    overflow: hidden;
-}
-
-/* Desktop icons */
-.desktop {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.icon {
-    width: 90px;
-    text-align: center;
-    color: white;
-    cursor: pointer;
-    font-size: 13px;
-}
-
-.icon img {
-    width: 48px;
-    height: 48px;
-    display: block;
-    margin: 0 auto 5px;
-}
-
-.icon img {
-    transition: transform 0.2s ease;
-}
-
-.icon:hover img {
-    transform: scale(1.15);
-}
-
-
-/* Taskbar */
-.taskbar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 40px;
-    background: #c0c0c0;
-    border-top: 2px solid #fff;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 15px;
+* {
     box-sizing: border-box;
 }
 
-.clock {
-    background: #c0c0c0;
-    border: 1px inset #c0c0c0;
-    padding: 5px 10px;
-    font-size: 14px;
-}
-
-/* Window popup */
-.window {
-    position: absolute;
-    top: 120px;
-    left: 250px;
-    width: 700px;
-    background: #C0C0C0;
-    border: 2px solid #0D1A63;
-    display: none;
-}
-
-.window-content p {
-    margin: 5px 0;
-}
-
-.scrollable {
-    height: 220px;        /* fixed height */
-    overflow-y: auto;     /* vertical scroll */
-    background: #C0C0C0;
-    border: 2px inset #808080;
-    padding: 10px;
-    cursor: url("cursors/pointer.cur"), pointer;
-}
-
-/* Title bar */
-.title-bar {
-    background: linear-gradient(to right, #2a398b, #516dc3);
-    color: white;
-    padding: 4px 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Close button */
-.close-btn {
-    background: #C0C0C0;
-    border: 2px outset #ffffff;
-    width: 22px;
-    height: 22px;
-    cursor: pointer;
-    font-weight: bold;
-    cursor: url("cursors/pointer.cur"), pointer;
-}
-
-.close-btn:active {
-    border: 2px inset #808080;
-}
-
-/* Window content */
-.window-content {
-    padding: 10px;
-    text-align: center;
-    cursor: url("cursors/cursor.cur"), pointer;
-}
-
-.window-content img {
-    max-width: 100%;
-}
-
-/* Custom cursors */
+html,
 body {
-    cursor: url("cursors/cursor.cur"), default;
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
-/* Pointer  */
+body {
+    background: #008080;
+    font-family: Tahoma, Arial, sans-serif;
+    overflow: hidden;
+    cursor: url("cursors/cursor.cur"), default;
+    color: #000;
+}
+
 a,
 button,
-.icon {
+.icon,
+.close-btn,
+.win-btn,
+.contact-icons img,
+.icon-button {
     cursor: url("cursors/pointer.cur"), pointer;
 }
 
-/* Waiting / loading state */
 .waiting {
     cursor: url("cursors/loading.cur"), wait;
 }
 
-.window-buttons {
+.desktop {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 40px);
+    overflow: hidden;
+}
+
+.icon {
+    position: absolute;
+    width: 92px;
+    padding: 4px;
     text-align: center;
-    margin-top: 10px;
+    color: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.icon img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 6px;
+    transition: transform 0.15s ease;
+    pointer-events: none;
+}
+
+.icon span {
+    display: inline-block;
+    padding: 2px 4px;
+    line-height: 1.2;
+    font-size: 13px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.45);
+}
+
+.icon:hover img {
+    transform: scale(1.12);
+}
+
+.icon.selected span {
+    background: #000080;
+    outline: 1px dotted #fff;
+}
+
+/* Windows */
+.window {
+    position: absolute;
+    top: 110px;
+    left: 220px;
+    width: 520px;
+    display: none;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    z-index: 100;
+}
+
+.window-small {
+    width: 360px;
+}
+
+.window-medium {
+    width: 460px;
+}
+
+.window-large {
+    width: 760px;
+}
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 3px 4px;
+    background: linear-gradient(to right, #2a398b, #516dc3);
+    color: #fff;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: move;
+}
+
+.title-text {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.close-btn {
+    min-width: 24px;
+    width: 24px;
+    height: 22px;
+    padding: 0;
+    font-size: 12px;
+    font-weight: bold;
+    background: #c0c0c0;
+    color: #000;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+}
+
+.close-btn:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+.window-body {
+    padding: 8px;
+}
+
+.window-content {
+    padding: 10px;
+    background: #c0c0c0;
+}
+
+.scrollable {
+    max-height: 320px;
+    overflow-y: auto;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    background: #c0c0c0;
+}
+
+.window-content h3 {
+    margin: 14px 0 6px;
+    font-size: 15px;
+}
+
+.window-content p {
+    margin: 4px 0;
+    line-height: 1.35;
+    font-size: 14px;
+}
+
+.window-content a {
+    color: #000080;
+    text-decoration: underline;
+}
+
+.muted {
+    color: #2b2b2b;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.centered-content {
+    text-align: center;
+}
+
+.construction-gif {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 12px;
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.project-card {
+    padding: 8px;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    background: #c0c0c0;
+}
+
+.project-media {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    margin: 8px 0 10px;
+    border: 1px solid #808080;
+    background: #000;
+}
+
+.window-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.win-btn,
+.start-btn,
+.icon-button {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 13px;
+    background: #c0c0c0;
+    color: #000;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
 }
 
 .win-btn {
-    background: #C0C0C0;
-    border: 2px outset #ffffff;
-    padding: 4px 20px;
-    font-family: Tahoma, Arial, sans-serif;
-    cursor: url("cursors/pointer.cur"), pointer;
+    min-width: 76px;
+    padding: 4px 18px;
 }
 
-.win-btn:active {
-    border: 2px inset #808080;
+.start-btn {
+    min-width: 82px;
+    height: 30px;
+    padding: 0 12px;
+    font-weight: bold;
+}
+
+.icon-button {
+    padding: 0;
+    border: none;
+    background: transparent;
+}
+
+.win-btn:active,
+.start-btn:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
 }
 
 .contact-form {
     display: flex;
     flex-direction: column;
-    text-align: left;
     gap: 6px;
-    margin-bottom: 15px;
+    text-align: left;
+}
+
+.contact-form label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 4px;
 }
 
 .contact-form input,
 .contact-form textarea {
-    border: 2px inset #808080;
-    padding: 4px;
+    width: 100%;
+    padding: 6px;
     font-family: Tahoma, Arial, sans-serif;
+    font-size: 13px;
+    background: #fff;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    resize: vertical;
 }
 
 .contact-icons {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.contact-icons a,
+.contact-icons button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .contact-icons img {
     width: 28px;
-    cursor: url("cursors/pointer.cur"), pointer;
+    height: 28px;
     transition: transform 0.15s ease;
 }
 
 .contact-icons img:hover {
     transform: scale(1.1);
-    cursor: url("cursors/pointer.cur"), pointer;
 }
 
+.taskbar {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    padding: 4px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    z-index: 1000;
+}
+
+.clock {
+    min-width: 88px;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 13px;
+    background: #c0c0c0;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+/* Alert */
 .win-alert {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.2);
     display: none;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.18);
+    z-index: 2000;
 }
 
 .alert-box {
-    width: 300px;
-    background: #C0C0C0;
-    border: 2px solid #0D1A63;
+    width: 320px;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
     padding: 10px;
-    font-family: Tahoma, Arial, sans-serif;
 }
 
 .alert-title {
+    margin: -10px -10px 10px;
+    padding: 4px 6px;
     background: linear-gradient(to right, #2a398b, #516dc3);
-    color: white;
-    padding: 4px;
+    color: #fff;
+    font-size: 13px;
     font-weight: bold;
-    margin: -10px -10px 10px -10px;
 }
 
 .alert-message {
-    padding: 10px 0;
+    padding: 10px 4px 6px;
     text-align: center;
+    font-size: 14px;
+    line-height: 1.35;
 }
 
 .alert-buttons {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    margin-top: 12px;
 }
 
-.alert-buttons .win-btn {
-    min-width: 70px;
+/* Scrollbar styling for WebKit browsers */
+.scrollable::-webkit-scrollbar {
+    width: 14px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    background: #c0c0c0;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background: #9a9a9a;
+    border: 2px solid #c0c0c0;
+}
+
+@media (max-width: 900px) {
+    .window,
+    .window-large,
+    .window-medium,
+    .window-small {
+        width: min(92vw, 620px);
+        left: 4vw;
+        top: 70px;
+    }
+
+    .scrollable {
+        max-height: 260px;
+    }
 }
