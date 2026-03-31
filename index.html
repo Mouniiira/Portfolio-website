@@ -10,32 +10,30 @@
 
     <main class="desktop" aria-label="Desktop">
 
-        <!-- Desktop Icons -->
-        <div class="icon" onclick="openWindow('AboutWindow')" style="top: 20px; left: 20px;">
+        <div class="icon" data-window="AboutWindow" style="top: 20px; left: 20px;">
             <img src="icons/user.png" alt="About icon">
             <span>About</span>
         </div>
 
-        <div class="icon" onclick="openWindow('ProjectsWindow')" style="top: 140px; left: 20px;">
+        <div class="icon" data-window="ProjectsWindow" style="top: 140px; left: 20px;">
             <img src="icons/earth.png" alt="Projects icon">
             <span>Projects</span>
         </div>
 
-        <div class="icon" onclick="openWindow('GamesWindow')" style="top: 260px; left: 20px;">
+        <div class="icon" data-window="GamesWindow" style="top: 260px; left: 20px;">
             <img src="icons/control.png" alt="Games icon">
             <span>Games</span>
         </div>
 
-        <div class="icon" onclick="openWindow('ContactWindow')" style="top: 380px; left: 20px;">
+        <div class="icon" data-window="ContactWindow" style="top: 380px; left: 20px;">
             <img src="icons/letter.png" alt="Contact icon">
             <span>Contact me</span>
         </div>
 
-        <!-- About Window -->
         <section class="window" id="AboutWindow" aria-label="About window">
             <div class="title-bar">
                 <span class="title-text">About</span>
-                <button class="close-btn" type="button" onclick="closeWindow('AboutWindow')" aria-label="Close About window">X</button>
+                <button class="close-btn" type="button" data-close="AboutWindow" aria-label="Close About window">X</button>
             </div>
             <div class="window-body">
                 <div class="window-content scrollable">
@@ -70,7 +68,7 @@
         <section class="window window-large" id="ProjectsWindow" aria-label="Projects window">
             <div class="title-bar">
                 <span class="title-text">Projects</span>
-                <button class="close-btn" type="button" onclick="closeWindow('ProjectsWindow')" aria-label="Close Projects window">X</button>
+                <button class="close-btn" type="button" data-close="ProjectsWindow" aria-label="Close Projects window">X</button>
             </div>
             <div class="window-body">
                 <div class="window-content scrollable project-list">
@@ -107,27 +105,25 @@
             </div>
         </section>
 
-        <!-- Games Window -->
         <section class="window window-small" id="GamesWindow" aria-label="Games window">
             <div class="title-bar">
                 <span class="title-text">Games</span>
-                <button class="close-btn" type="button" onclick="closeWindow('GamesWindow')" aria-label="Close Games window">X</button>
+                <button class="close-btn" type="button" data-close="GamesWindow" aria-label="Close Games window">X</button>
             </div>
             <div class="window-body">
                 <div class="window-content centered-content">
                     <img src="under-construction.gif" alt="Under construction" class="construction-gif">
                     <div class="window-buttons">
-                        <button class="win-btn" type="button" onclick="closeWindow('GamesWindow')">OK</button>
+                        <button class="win-btn" type="button" data-close="GamesWindow">OK</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Window -->
         <section class="window window-medium" id="ContactWindow" aria-label="Contact window">
             <div class="title-bar">
                 <span class="title-text">Contact Me</span>
-                <button class="close-btn" type="button" onclick="closeWindow('ContactWindow')" aria-label="Close Contact window">X</button>
+                <button class="close-btn" type="button" data-close="ContactWindow" aria-label="Close Contact window">X</button>
             </div>
 
             <div class="window-body">
@@ -166,7 +162,7 @@
                     </form>
 
                     <div class="contact-icons">
-                        <button class="icon-button" type="button" onclick="copyEmail()" aria-label="Copy email">
+                        <button class="icon-button" type="button" id="copyEmailBtn" aria-label="Copy email">
                             <img src="icons/at.png" alt="Email">
                         </button>
 
@@ -184,19 +180,17 @@
 
     </main>
 
-    <!-- Taskbar -->
     <footer class="taskbar">
         <button class="start-btn" type="button">Start</button>
         <div class="clock" id="clock" aria-label="Current time"></div>
     </footer>
 
-    <!-- Windows Alert -->
     <div class="win-alert" id="winAlert" aria-hidden="true">
         <div class="alert-box">
             <div class="alert-title">mouniiira.com</div>
             <div class="alert-message" id="alertMessage"></div>
             <div class="alert-buttons">
-                <button class="win-btn" type="button" onclick="closeAlert()">OK</button>
+                <button class="win-btn" type="button" id="alertOkBtn">OK</button>
             </div>
         </div>
     </div>
