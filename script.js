@@ -1,23 +1,31 @@
-// =========================
-// EmailJS
-// =========================
 emailjs.init({
     publicKey: "nudWwnYWHTCO1PI2C"
 });
 
-// =========================
-// Z-index management
-// =========================
 let topZIndex = 300;
+
+const originalPositions = {
+    icons: {
+        About: { top: "20px", left: "20px" },
+        Projects: { top: "140px", left: "20px" },
+        Games: { top: "260px", left: "20px" },
+        Contact: { top: "380px", left: "20px" }
+    },
+    windows: {
+        AboutWindow: { top: "110px", left: "220px" },
+        ProjectsWindow: { top: "110px", left: "220px" },
+        GamesWindow: { top: "110px", left: "220px" },
+        ContactWindow: { top: "110px", left: "220px" },
+        MusicWindow: { top: "110px", left: "220px" },
+        HelpWindow: { top: "110px", left: "220px" }
+    }
+};
 
 function bringToFront(element) {
     topZIndex += 1;
     element.style.zIndex = topZIndex;
 }
 
-// =========================
-// Window controls
-// =========================
 function openWindow(windowId) {
     const win = document.getElementById(windowId);
     if (!win) return;
@@ -33,9 +41,6 @@ function closeWindow(windowId) {
     win.style.display = "none";
 }
 
-// =========================
-// Clock
-// =========================
 function updateClock() {
     const clock = document.getElementById("clock");
     if (!clock) return;
@@ -46,9 +51,6 @@ function updateClock() {
     clock.textContent = `${hours}:${minutes}`;
 }
 
-// =========================
-// Windows-style alert
-// =========================
 function showAlert(message) {
     const alertMessage = document.getElementById("alertMessage");
     const alertBox = document.getElementById("winAlert");
@@ -66,9 +68,6 @@ function closeAlert() {
     alertBox.style.display = "none";
 }
 
-// =========================
-// Copy email
-// =========================
 function copyEmail() {
     const email = "mlabarang04@gmail.com";
 
@@ -81,9 +80,6 @@ function copyEmail() {
         });
 }
 
-// =========================
-// Drag helpers
-// =========================
 function clamp(value, min, max) {
     return Math.max(min, Math.min(value, max));
 }
@@ -181,11 +177,15 @@ function makeIconDraggable(iconEl) {
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
 
-        // reset move flag after click cycle finishes
         setTimeout(() => {
             hasMoved = false;
         }, 0);
     }
+
+    iconEl.addEventListener("dblclick", function () {
+        const windowId = iconEl.dataset.window;
+        if (windowId) openWindow(windowId);
+    });
 
     iconEl.addEventListener("click", function (event) {
         selectIcon(iconEl);
@@ -197,9 +197,6 @@ function makeIconDraggable(iconEl) {
     });
 }
 
-// =========================
-// Desktop icon selection
-// =========================
 function clearIconSelection() {
     document.querySelectorAll(".icon").forEach((icon) => {
         icon.classList.remove("selected");
@@ -211,15 +208,54 @@ function selectIcon(iconEl) {
     iconEl.classList.add("selected");
 }
 
-// =========================
-// Setup
-// =========================
+function toggleStartMenu() {
+    const startMenu = document.getElementById("startMenu");
+    if (!startMenu) return;
+
+    startMenu.classList.toggle("open");
+}
+
+function closeStartMenu() {
+    const startMenu = document.getElementById("startMenu");
+    if (!startMenu) return;
+
+    startMenu.classList.remove("open");
+}
+
+function refreshDesktop() {
+    const icons = document.querySelectorAll(".icon");
+    icons.forEach((icon) => {
+        const label = icon.querySelector("span")?.textContent?.trim();
+        if (label && originalPositions.icons[label]) {
+            icon.style.top = originalPositions.icons[label].top;
+            icon.style.left = originalPositions.icons[label].left;
+        }
+    });
+
+    Object.entries(originalPositions.windows).forEach(([id, pos]) => {
+        const win = document.getElementById(id);
+        if (!win) return;
+
+        win.style.top = pos.top;
+        win.style.left = pos.left;
+        win.style.display = "none";
+    });
+
+    const musicPlayer = document.getElementById("musicPlayer");
+    if (musicPlayer) {
+        musicPlayer.pause();
+        musicPlayer.currentTime = 0;
+    }
+
+    closeAlert();
+    closeStartMenu();
+    clearIconSelection();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Clock
     updateClock();
     setInterval(updateClock, 1000);
 
-    // Contact form
     const form = document.getElementById("contactForm");
     if (form) {
         form.addEventListener("submit", function (event) {
@@ -245,7 +281,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Draggable windows
     document.querySelectorAll(".window").forEach((windowEl) => {
         const titleBar = windowEl.querySelector(".title-bar");
         if (titleBar) {
@@ -257,22 +292,72 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Draggable desktop icons
     document.querySelectorAll(".icon").forEach((iconEl) => {
         makeIconDraggable(iconEl);
     });
 
-    // Clicking empty desktop clears icon selection
+    document.querySelectorAll("[data-close]").forEach((btn) => {
+        btn.addEventListener("click", function () {
+            const windowId = btn.dataset.close;
+            if (windowId) closeWindow(windowId);
+        });
+    });
+
+    const alertOkBtn = document.getElementById("alertOkBtn");
+    if (alertOkBtn) {
+        alertOkBtn.addEventListener("click", closeAlert);
+    }
+
+    const copyEmailBtn = document.getElementById("copyEmailBtn");
+    if (copyEmailBtn) {
+        copyEmailBtn.addEventListener("click", copyEmail);
+    }
+
     const desktop = document.querySelector(".desktop");
     if (desktop) {
         desktop.addEventListener("click", function (event) {
             if (event.target === desktop) {
                 clearIconSelection();
+                closeStartMenu();
             }
         });
     }
 
-    // Prevent alert clicks from closing through overlay accidentally
+    const startBtn = document.getElementById("startBtn");
+    if (startBtn) {
+        startBtn.addEventListener("click", function (event) {
+            event.stopPropagation();
+            toggleStartMenu();
+        });
+    }
+
+    const startMenu = document.getElementById("startMenu");
+    if (startMenu) {
+        startMenu.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    }
+
+    document.querySelectorAll(".start-menu-item").forEach((item) => {
+        item.addEventListener("click", function () {
+            const action = item.dataset.startAction;
+
+            if (action === "music") {
+                openWindow("MusicWindow");
+            } else if (action === "help") {
+                openWindow("HelpWindow");
+            } else if (action === "refresh") {
+                refreshDesktop();
+            }
+
+            closeStartMenu();
+        });
+    });
+
+    document.addEventListener("click", function () {
+        closeStartMenu();
+    });
+
     const alertBox = document.querySelector(".alert-box");
     if (alertBox) {
         alertBox.addEventListener("mousedown", function (event) {
