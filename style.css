@@ -455,6 +455,134 @@ audio {
     margin-top: 12px;
 }
 
+.sound-window {
+    width: 540px;
+}
+
+.sound-menu-bar {
+    display: flex;
+    gap: 18px;
+    padding: 3px 8px;
+    font-size: 13px;
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+}
+
+.sound-top-panel {
+    display: grid;
+    grid-template-columns: 110px 1fr 110px;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sound-info-box {
+    background: #c0c0c0;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    padding: 6px 8px;
+    min-height: 58px;
+}
+
+.sound-label {
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+
+.sound-time {
+    font-size: 18px;
+    text-align: center;
+}
+
+.sound-visual-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sound-visualizer {
+    height: 44px;
+    background: #000;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+    overflow: hidden;
+    position: relative;
+}
+
+.sound-wave {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 200%;
+    height: 2px;
+    background: lime;
+    transform: translateY(-50%);
+    opacity: 0.9;
+}
+
+.sound-track-name {
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sound-slider-wrap {
+    margin: 8px 0 12px;
+    padding: 4px 2px;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+}
+
+#seekBar {
+    width: 100%;
+    margin: 0;
+    accent-color: #b0b0b0;
+}
+
+.sound-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.sound-btn {
+    min-width: 52px;
+    height: 34px;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 16px;
+    background: #c0c0c0;
+    color: #000;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+}
+
+.sound-btn:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #ffffff;
+    border-bottom: 2px solid #ffffff;
+}
+
+.sound-record-btn {
+    color: #b00000;
+    font-size: 18px;
+}
+
+.sound-window .window-buttons {
+    margin-top: 4px;
+}
+
 /* Scrollbar styling for WebKit browsers */
 .scrollable::-webkit-scrollbar {
     width: 14px;
