@@ -30,24 +30,58 @@
             <span>Contact me</span>
         </div>
 
-        <section class="window window-small" id="MusicWindow" aria-label="Music window">
+        <section class="window sound-window" id="MusicWindow" aria-label="Music window">
     <div class="title-bar">
-        <span class="title-text">Music Player</span>
+        <span class="title-text">Sound Recorder</span>
         <button class="close-btn" type="button" data-close="MusicWindow" aria-label="Close Music window">X</button>
     </div>
+
+    <div class="sound-menu-bar">
+        <span>File</span>
+        <span>Edit</span>
+        <span>Effects</span>
+        <span>Help</span>
+    </div>
+
     <div class="window-body">
-        <div class="window-content centered-content">
-            <p><strong>Now Playing</strong></p>
-            <p>Choose your track and press play.</p>
+        <div class="sound-top-panel">
+            <div class="sound-info-box">
+                <div class="sound-label">Position:</div>
+                <div class="sound-time" id="currentTimeDisplay">0.00 sec.</div>
+            </div>
 
-            <audio id="musicPlayer" controls>
-                <source src="music/espresso.mp3" type="audio/mpeg">
-            </audio>
+            <div class="sound-visual-box">
+                <div class="sound-visualizer">
+                    <div class="sound-wave" id="soundWave"></div>
+                </div>
+                <div class="sound-track-name" id="nowPlayingLabel">The boy is mine - Brandy, Monica</div>
+            </div>
 
-            <div class="window-buttons">
-                <button class="win-btn" type="button" data-close="MusicWindow">OK</button>
+            <div class="sound-info-box">
+                <div class="sound-label">Length:</div>
+                <div class="sound-time" id="durationDisplay">0.00 sec.</div>
             </div>
         </div>
+
+        <div class="sound-slider-wrap">
+            <input type="range" id="seekBar" min="0" max="100" value="0">
+        </div>
+
+        <div class="sound-controls">
+            <button class="sound-btn" type="button" id="prevTrackBtn" aria-label="Previous track">|◀◀</button>
+            <button class="sound-btn" type="button" id="playPauseBtn" aria-label="Play or pause">▶</button>
+            <button class="sound-btn" type="button" id="nextTrackBtn" aria-label="Next track">▶▶|</button>
+            <button class="sound-btn" type="button" id="stopTrackBtn" aria-label="Stop">■</button>
+            <button class="sound-btn sound-record-btn" type="button" id="recordFakeBtn" aria-label="Record">●</button>
+        </div>
+
+        <div class="window-buttons">
+            <button class="win-btn" type="button" data-close="MusicWindow">OK</button>
+        </div>
+
+        <audio id="musicPlayer">
+            <source src="music/boyismine.mp3" type="audio/mpeg">
+        </audio>
     </div>
 </section>
 
