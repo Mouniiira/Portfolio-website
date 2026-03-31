@@ -87,6 +87,7 @@ button,
     border-right: 2px solid #404040;
     border-bottom: 2px solid #404040;
     z-index: 100;
+    text-align: center;
 }
 
 .window-small {
@@ -341,6 +342,74 @@ button,
     border-left: 2px solid #808080;
     border-right: 2px solid #ffffff;
     border-bottom: 2px solid #ffffff;
+}
+
+.taskbar-left {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Start menu */
+.start-menu {
+    position: absolute;
+    left: 0;
+    bottom: 36px;
+    width: 190px;
+    display: none;
+    background: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    z-index: 2500;
+    min-height: 180px;
+}
+
+.start-menu.open {
+    display: flex;
+}
+
+.start-menu-sidebar {
+    width: 28px;
+    background: linear-gradient(to bottom, #2a398b, #516dc3);
+    color: #fff;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 8px 4px;
+    user-select: none;
+}
+
+.start-menu-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.start-menu-item {
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+    background: #c0c0c0;
+    border: none;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 13px;
+    color: #000;
+}
+
+.start-menu-item:hover {
+    background: #000080;
+    color: #fff;
+}
+
+audio {
+    width: 100%;
+    max-width: 280px;
+    margin-top: 8px;
 }
 
 /* Alert */
