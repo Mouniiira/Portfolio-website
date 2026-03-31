@@ -85,6 +85,7 @@ body {
     background: #C0C0C0;
     border: 2px inset #808080;
     padding: 10px;
+    cursor: url("cursors/pointer.cur"), pointer;
 }
 
 /* Title bar */
@@ -116,6 +117,7 @@ body {
 .window-content {
     padding: 10px;
     text-align: center;
+    cursor: url("cursors/cursor.cur"), pointer;
 }
 
 .window-content img {
@@ -179,12 +181,13 @@ button,
 
 .contact-icons img {
     width: 28px;
-    cursor: pointer;
+    cursor: url("cursors/pointer.cur"), pointer;
     transition: transform 0.15s ease;
 }
 
 .contact-icons img:hover {
     transform: scale(1.1);
+    cursor: url("cursors/pointer.cur"), pointer;
 }
 
 .win-alert {
