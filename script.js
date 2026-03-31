@@ -4,12 +4,57 @@ emailjs.init({
 
 let topZIndex = 300;
 
+const playlist = [
+    {
+        title: "The boy is mine - Brandy, Monica",
+        src: "music/boyismine.mp3"
+    },
+    {
+        title: "My way - USHER",
+        src: "music/myway.mp3"
+    },
+    {
+        title: "No, No, No Pt. 2 - Destiny's Child ft. Wyclef Jean",
+        src: "music/nonono.mp3"
+    },
+    {
+        title: "Gettin' Jiggy Wit It - Will Smith",
+        src: "music/jiggy.mp3"
+    },
+    {
+        title: "Everybody (Backstreet's Back) - Backstreet Boys",
+        src: "music/everybody.mp3"
+    },
+    {
+        title: "You make me wanna - USHER",
+        src: "music/makemewanna.mp3"
+    },
+    {
+        title: "I want you back - NSYNC",
+        src: "music/wantyouback.mp3"
+    },
+    {
+        title: "I get lonely - Janet Jackson",
+        src: "music/lonely.mp3"
+    },
+    {
+        title: "Dangerous - Busta Rhymes",
+        src: "music/dangerous.mp3"
+    },
+    {
+        title: "Doo Wop - Lauryn Hill",
+        src: "music/doowop.mp3"
+    }
+];
+
+let currentTrackIndex = 0;
+
 const originalPositions = {
     icons: {
         About: { top: "20px", left: "20px" },
         Projects: { top: "140px", left: "20px" },
         Games: { top: "260px", left: "20px" },
-        Contact: { top: "380px", left: "20px" }
+        "Contact me": { top: "380px", left: "20px" }
     },
     windows: {
         AboutWindow: { top: "110px", left: "220px" },
@@ -78,6 +123,27 @@ function copyEmail() {
         .catch(() => {
             showAlert("Could not copy email.");
         });
+}
+
+function loadTrack(index) {
+    const player = document.getElementById("musicPlayer");
+    const label = document.getElementById("nowPlayingLabel");
+
+    if (!player || !label || !playlist.length) return;
+
+    currentTrackIndex = (index + playlist.length) % playlist.length;
+
+    player.src = playlist[currentTrackIndex].src;
+    label.textContent = playlist[currentTrackIndex].title;
+    player.load();
+}
+
+function nextTrack() {
+    loadTrack(currentTrackIndex + 1);
+}
+
+function previousTrack() {
+    loadTrack(currentTrackIndex - 1);
 }
 
 function clamp(value, min, max) {
@@ -224,6 +290,7 @@ function closeStartMenu() {
 
 function refreshDesktop() {
     const icons = document.querySelectorAll(".icon");
+
     icons.forEach((icon) => {
         const label = icon.querySelector("span")?.textContent?.trim();
         if (label && originalPositions.icons[label]) {
@@ -247,6 +314,7 @@ function refreshDesktop() {
         musicPlayer.currentTime = 0;
     }
 
+    loadTrack(0);
     closeAlert();
     closeStartMenu();
     clearIconSelection();
@@ -255,6 +323,8 @@ function refreshDesktop() {
 document.addEventListener("DOMContentLoaded", function () {
     updateClock();
     setInterval(updateClock, 1000);
+
+    loadTrack(currentTrackIndex);
 
     const form = document.getElementById("contactForm");
     if (form) {
@@ -311,6 +381,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const copyEmailBtn = document.getElementById("copyEmailBtn");
     if (copyEmailBtn) {
         copyEmailBtn.addEventListener("click", copyEmail);
+    }
+
+    const prevTrackBtn = document.getElementById("prevTrackBtn");
+    if (prevTrackBtn) {
+        prevTrackBtn.addEventListener("click", previousTrack);
+    }
+
+    const nextTrackBtn = document.getElementById("nextTrackBtn");
+    if (nextTrackBtn) {
+        nextTrackBtn.addEventListener("click", nextTrack);
+    }
+
+    const musicPlayer = document.getElementById("musicPlayer");
+    if (musicPlayer) {
+        musicPlayer.addEventListener("ended", nextTrack);
     }
 
     const desktop = document.querySelector(".desktop");
