@@ -126,8 +126,11 @@ function copyEmail() {
 }
 
 function formatSeconds(seconds) {
-    if (!Number.isFinite(seconds)) return "0.00 sec.";
-    return `${seconds.toFixed(2)} sec.`;
+    if (!Number.isFinite(seconds)) return "0:00";
+
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+    return `${mins}:${secs}`;
 }
 
 function updateMusicUI() {
@@ -178,12 +181,22 @@ function loadTrack(index) {
     updateMusicUI();
 }
 
-function nextTrack() {
+function nextTrack(autoPlay = true) {
     loadTrack(currentTrackIndex + 1);
+
+    const player = document.getElementById("musicPlayer");
+    if (autoPlay && player) {
+        player.play();
+    }
 }
 
-function previousTrack() {
+function previousTrack(autoPlay = true) {
     loadTrack(currentTrackIndex - 1);
+
+    const player = document.getElementById("musicPlayer");
+    if (autoPlay && player) {
+        player.play();
+    }
 }
 
 function playPauseTrack() {
@@ -516,6 +529,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if (playPauseBtn && musicPlayer.currentTime !== 0) {
                 playPauseBtn.textContent = "▶";
             }
+        });
+
+        musicPlayer.addEventListener("ended", function () {
+            nextTrack(true);
         });
     }
 
