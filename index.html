@@ -1,169 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mouniiira.com</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
+    <main class="desktop" aria-label="Desktop">
 
-<div class="desktop">
-    <div class="icon" onclick="openWindow('AboutWindow')">
-        <img src="icons/user.png">
-        About
-    </div>
+        <!-- Desktop Icons -->
+        <div class="icon" onclick="openWindow('AboutWindow')" style="top: 20px; left: 20px;">
+            <img src="icons/user.png" alt="About icon">
+            <span>About</span>
+        </div>
 
-    <div class="icon" onclick="openWindow('ProjectsWindow')">
-        <img src="icons/earth.png">
-        Projects
-    </div>
+        <div class="icon" onclick="openWindow('ProjectsWindow')" style="top: 140px; left: 20px;">
+            <img src="icons/earth.png" alt="Projects icon">
+            <span>Projects</span>
+        </div>
 
-    <div class="icon" onclick="openWindow('GamesWindow')">
-        <img src="icons/control.png">
-        Games
-    </div>
+        <div class="icon" onclick="openWindow('GamesWindow')" style="top: 260px; left: 20px;">
+            <img src="icons/control.png" alt="Games icon">
+            <span>Games</span>
+        </div>
 
-    <div class="icon" onclick="openWindow('ContactWindow')">
-        <img src="icons/letter.png">
-        Contact me
-    </div>
-</div>
+        <div class="icon" onclick="openWindow('ContactWindow')" style="top: 380px; left: 20px;">
+            <img src="icons/letter.png" alt="Contact icon">
+            <span>Contact me</span>
+        </div>
 
-<div class="window" id="AboutWindow">
-    <div class="title-bar">
-        <span>About</span>
-        <button class="close-btn" onclick="closeWindow('AboutWindow')">X</button>
-    </div>
-    <div class="window-content scrollable">
-        <p>Mounira Labarang is a freelance front end web developer based in Yaounde, Cameroon.</p>
-        <h3>Education</h3>
-        <p>Knowledge in software engineering</p>
-        <p style="font-style: italic;">YouTube university</p>
-        <p>Bachelor's degree in Artificial Intelligence and Big Data</p>
-        <p style="font-style: italic;">Keyce Informatique, 2025</p>
-        <h3>Tools</h3>
-        <p>HTML/CSS, JS, Python/Streamlit, Visual Studio Code, Microsoft Excel</p>
-        <h3>Languages</h3>
-        <p>English – advanced level</p>
-        <p>French – advanced level</p>
-        <p>Hausa – intermediate level</p>
-        <p>Arabic – intermediate level</p>
-        <p>Spanish – intermediate level</p>
-        <h3>Other interests</h3>
-        <p>Illustration</p>
-        <p>Frame by frame 2D animation</p>
-        <p>Reading</p>
-        <p>Writing</p>
-        <p>Sound production</p>
-
-    </div>
-</div>
-
-<div class="window" id="ProjectsWindow">
-    <div class="title-bar">
-        <span>Projects</span>
-        <button class="close-btn" onclick="closeWindow('ProjectsWindow')">X</button>
-    </div>
-    <div class="window-content scrollable">
-        <h3>CrownLog</h3>
-        <p>Personal project</p>
-            <img src="demos/CrownLog.png" >
-        </video>
-        <p>CrownLog is a hair journal meant to help log and organize hairstyles. It's coded in JavaScript with the help of the React library. </p>
-        <href>Link</href>
-        <h3>DermaCheck</h3>
-        <p>Bachelor's final project</p>
-        <video width="600"  autoplay muted>
-            <source src="demos/DermaCheck.mp4" type="video/mp4">
-        </video>
-        <p>DermaCheck is an app that uses machine learning and image classification to identify various acne types. It then gives product recommendations based on the user's skin type and more advice with the help of the built in chatbot. Made in streamlit using Python. Currently being redesigned for better UI/UX.</p>
-    </div>
-</div>
-
-<div class="window" id="GamesWindow">
-    <div class="title-bar">
-        <span>Games</span>
-    </div>
-    <div class="window-content">
-        <img src="under-construction.gif">
-        <div class="window-buttons">
-    <button class="win-btn" onclick="this.closest('.window').style.display='none'">OK</button>
-</div>
-    </div>
-</div>
-
-<div class="window" id="ContactWindow">
-    <div class="title-bar">
-        <span>Contact Me</span>
-        <button class="close-btn" onclick="closeWindow('ContactWindow')">X</button>
-    </div>
-
-    <div class="window-content">
-        <form class="contact-form" id="contactForm">
-            <label for="clientName">Name:</label>
-            <input
-                type="text"
-                id="clientName"
-                name="client_name"
-                placeholder="Your name"
-                required
-            >
-
-            <label for="clientEmail">Email:</label>
-            <input
-                type="email"
-                id="clientEmail"
-                name="client_email"
-                placeholder="Your email"
-                required
-            >
-
-            <label for="projectDescription">Project Description:</label>
-            <textarea
-                id="projectDescription"
-                name="project_description"
-                rows="4"
-                placeholder="Describe your project"
-                required
-            ></textarea>
-
-            <div class="window-buttons">
-                <button type="submit" class="win-btn">Send</button>
+        <!-- About Window -->
+        <section class="window" id="AboutWindow" aria-label="About window">
+            <div class="title-bar">
+                <span class="title-text">About</span>
+                <button class="close-btn" type="button" onclick="closeWindow('AboutWindow')" aria-label="Close About window">X</button>
             </div>
-        </form>
+            <div class="window-body">
+                <div class="window-content scrollable">
+                    <p>Mounira Labarang is a freelance front end web developer based in Yaounde, Cameroon.</p>
 
-        <div class="contact-icons">
-            <img src="icons/at.png" alt="Email" onclick="copyEmail()">
+                    <h3>Education</h3>
+                    <p>Knowledge in software engineering</p>
+                    <p class="muted italic">YouTube university</p>
+                    <p>Bachelor's degree in Artificial Intelligence and Big Data</p>
+                    <p class="muted italic">Keyce Informatique, 2025</p>
 
-            <a href="https://wa.me/237655970629" target="_blank" rel="noopener noreferrer">
-                <img src="icons/whatsapp.png" alt="WhatsApp">
-            </a>
+                    <h3>Tools</h3>
+                    <p>HTML/CSS, JavaScript, Python/Streamlit, Visual Studio Code, Microsoft Excel</p>
 
-            <a href="https://github.com/Mouniiira" target="_blank" rel="noopener noreferrer">
-                <img src="icons/github.png" alt="GitHub">
-            </a>
+                    <h3>Languages</h3>
+                    <p>English – advanced level</p>
+                    <p>French – advanced level</p>
+                    <p>Hausa – intermediate level</p>
+                    <p>Arabic – intermediate level</p>
+                    <p>Spanish – intermediate level</p>
+
+                    <h3>Other interests</h3>
+                    <p>Illustration</p>
+                    <p>Frame by frame 2D animation</p>
+                    <p>Reading</p>
+                    <p>Writing</p>
+                    <p>Sound production</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="window window-large" id="ProjectsWindow" aria-label="Projects window">
+            <div class="title-bar">
+                <span class="title-text">Projects</span>
+                <button class="close-btn" type="button" onclick="closeWindow('ProjectsWindow')" aria-label="Close Projects window">X</button>
+            </div>
+            <div class="window-body">
+                <div class="window-content scrollable project-list">
+
+                    <article class="project-card">
+                        <h3>CrownLog</h3>
+                        <p class="muted">Personal project</p>
+                        <img src="demos/CrownLog.png" alt="CrownLog preview" class="project-media">
+                        <p>
+                            CrownLog is a hair journal meant to help users log and organize hairstyles.
+                            It was built in JavaScript with React.
+                        </p>
+                        <p>
+                            <a href="#" target="_blank" rel="noopener noreferrer">Project link</a>
+                        </p>
+                    </article>
+
+                    <article class="project-card">
+                        <h3>DermaCheck</h3>
+                        <p class="muted">Bachelor's final project</p>
+                        <video class="project-media" controls muted>
+                            <source src="demos/DermaCheck.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <p>
+                            DermaCheck is an application that uses machine learning and image classification
+                            to identify various acne types. It then gives product recommendations based on
+                            the user's skin type and provides additional guidance with a built-in chatbot.
+                            It was made in Streamlit using Python and is currently being redesigned for better UI/UX.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Games Window -->
+        <section class="window window-small" id="GamesWindow" aria-label="Games window">
+            <div class="title-bar">
+                <span class="title-text">Games</span>
+                <button class="close-btn" type="button" onclick="closeWindow('GamesWindow')" aria-label="Close Games window">X</button>
+            </div>
+            <div class="window-body">
+                <div class="window-content centered-content">
+                    <img src="under-construction.gif" alt="Under construction" class="construction-gif">
+                    <div class="window-buttons">
+                        <button class="win-btn" type="button" onclick="closeWindow('GamesWindow')">OK</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Window -->
+        <section class="window window-medium" id="ContactWindow" aria-label="Contact window">
+            <div class="title-bar">
+                <span class="title-text">Contact Me</span>
+                <button class="close-btn" type="button" onclick="closeWindow('ContactWindow')" aria-label="Close Contact window">X</button>
+            </div>
+
+            <div class="window-body">
+                <div class="window-content">
+                    <form class="contact-form" id="contactForm">
+                        <label for="clientName">Name:</label>
+                        <input
+                            type="text"
+                            id="clientName"
+                            name="client_name"
+                            placeholder="Your name"
+                            required
+                        >
+
+                        <label for="clientEmail">Email:</label>
+                        <input
+                            type="email"
+                            id="clientEmail"
+                            name="client_email"
+                            placeholder="Your email"
+                            required
+                        >
+
+                        <label for="projectDescription">Project Description:</label>
+                        <textarea
+                            id="projectDescription"
+                            name="project_description"
+                            rows="5"
+                            placeholder="Describe your project"
+                            required
+                        ></textarea>
+
+                        <div class="window-buttons">
+                            <button type="submit" class="win-btn">Send</button>
+                        </div>
+                    </form>
+
+                    <div class="contact-icons">
+                        <button class="icon-button" type="button" onclick="copyEmail()" aria-label="Copy email">
+                            <img src="icons/at.png" alt="Email">
+                        </button>
+
+                        <a href="https://wa.me/237655970629" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                            <img src="icons/whatsapp.png" alt="WhatsApp">
+                        </a>
+
+                        <a href="https://github.com/Mouniiira" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <img src="icons/github.png" alt="GitHub">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Taskbar -->
+    <footer class="taskbar">
+        <button class="start-btn" type="button">Start</button>
+        <div class="clock" id="clock" aria-label="Current time"></div>
+    </footer>
+
+    <!-- Windows Alert -->
+    <div class="win-alert" id="winAlert" aria-hidden="true">
+        <div class="alert-box">
+            <div class="alert-title">mouniiira.com</div>
+            <div class="alert-message" id="alertMessage"></div>
+            <div class="alert-buttons">
+                <button class="win-btn" type="button" onclick="closeAlert()">OK</button>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="taskbar">
-    <div class="clock" id="clock"></div>
-</div>
-
-<div class="win-alert" id="winAlert">
-    <div class="alert-box">
-        <div class="alert-title">mouniiira.com</div>
-        <div class="alert-message" id="alertMessage"></div>
-        <div class="alert-buttons">
-            <button class="win-btn" onclick="closeAlert()">OK</button>
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
