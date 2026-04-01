@@ -112,7 +112,7 @@ button,
     color: #fff;
     user-select: none;
     -webkit-user-select: none;
-    cursor: move;
+    cursor: url("cursors/grab.cur"),move;
 }
 
 .title-text {
@@ -214,9 +214,23 @@ button,
     display: block;
     width: 100%;
     max-width: 640px;
-    margin: 8px 0 10px;
+    margin: 8px auto 10px; 
     border: 1px solid #808080;
     background: #000;
+}
+
+.help1 {
+    display: block;
+    width: 50%;
+    margin: 8px auto 1px;
+    justify-content: center;
+}
+
+.help2 {
+    display: block;
+    width: 60%;
+    margin: 8px auto 10px;
+    justify-content: center;
 }
 
 .window-buttons {
@@ -572,11 +586,6 @@ audio {
     border-left: 2px solid #404040;
     border-right: 2px solid #ffffff;
     border-bottom: 2px solid #ffffff;
-}
-
-.sound-record-btn {
-    color: #b00000;
-    font-size: 18px;
 }
 
 .sound-window .window-buttons {
